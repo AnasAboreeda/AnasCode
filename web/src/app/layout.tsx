@@ -1,42 +1,31 @@
-'use client';
-
 import './globals.css';
+import { Inter } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
+import { defaultMetadata } from '@/lib/seo';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
-import GoogleAnalytics from '@/components/libs/GoogleAnalytics';
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
 
-const metadata = {
-  title: 'AnasCode',
-  description: 'Principal Software Engineer | Tech Lead | AI Enthusiast',
-};
-
+export const metadata = defaultMetadata;
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-
   return (
-    <html lang="en">
-      <head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <link rel="apple-touch-icon" sizes="180x180" href="/assets/anascode/logos/favicon/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/assets/anascode/logos/favicon/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/assets/anascode/logos/favicon/favicon-16x16.png" />
-        <link rel="manifest" href="/assets/anascode/logos/favicon/site.webmanifest" />
-        <link rel="mask-icon" href="/assets/anascode/logos/favicon/safari-pinned-tab.svg" color="#5bbad5" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
-      </head>
-      <UserProvider>
-        <body id="__next">
-          {children}
-          <GoogleAnalytics />
-        </body>
-      </UserProvider>
+    <html lang="en" className={inter.variable}>
+      <body className="antialiased">
+        <Header />
+        <main>{children}</main>
+        <Footer />
+        <Analytics />
+      </body>
     </html>
   );
 }

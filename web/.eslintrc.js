@@ -1,23 +1,13 @@
 module.exports = {
   root: true,
-  plugins: ['@typescript-eslint', 'import', 'prettier', 'jsx-a11y', 'react-hooks', 'storybook'],
   extends: [
-    'prettier',
     'next/core-web-vitals',
-    'next',
-    'plugin:storybook/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:import/typescript',
-    'plugin:jsx-a11y/recommended',
-    'airbnb-typescript/base',
-    'plugin:playwright/playwright-test',
+    'next/typescript',
+    'prettier',
   ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    project: './tsconfig.eslint.json',
-  },
   rules: {
-    'import/no-extraneous-dependencies': 'off',
-    'max-len': [1, 150, 2, { 'ignoreUrls': true }],
+    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    'react/no-unescaped-entities': 'off',
   },
 };

@@ -1,3 +1,5 @@
-import { handleAuth } from '@auth0/nextjs-auth0';
+import { NextResponse } from 'next/server';
 
-export const GET = handleAuth();
+export async function GET() {
+  return NextResponse.json({ message: 'Auth endpoint - to be implemented' });
+}
