@@ -1,0 +1,35 @@
+{
+  "home": {
+    "hero": {
+      "titleText": "Potentieel ontketenen met ",
+      "highlightedTitleText": "Code, AI & Data",
+      "subText": "Ontdek de kracht van software-engineering en datawetenschap met AnasCode. Door innovatieve technologie, grondige analyse en creatief probleemoplossen, transformeren we bedrijven en stimuleren we vooruitgang.",
+      "endText": "Laten we samen de toekomst vormgeven.",
+      "clientsText": "Ik heb samengewerkt met",
+      "hireMe": "Neem mij in dienst",
+      "downloadCV": "Download Mijn CV"
+    },
+    "nav": {
+      "about": "Over",
+      "services": "Diensten",
+      "portfolio": "Portefeuille",
+      "blog": "Blog",
+      "testimonials": "Getuigenissen",
+      "cvResume": "CV/Levensloop",
+      "hireMe": "Neem mij in dienst"
+    },
+    "about": {
+      "shortTitle": "Over mij",
+      "longTitle": "Wie ben ik?",
+      "description": "Ik ben een software engineer met meer dan 20 jaar ervaring in het ontwerpen en implementeren van oplossingen in veel talen voor verschillende bedrijfsdomeinen.",
+      "item1": "Het opbouwen en leiden van technische teams van wereldklasse",
+      "item2": "Ik werk al meer dan 20 jaar in deze sector en heb oplossingen ontworpen en geïmplementeerd in veel talen voor verschillende bedrijfsdomeinen.",
+      "item3": "Bewezen trackrecord bij het werken met grootschalige gedistribueerde systemen (multi-tier architecturen, applicatiebeveiliging, monitoring en opslagsystemen).",
+      "item4": "Met mijn ervaring in het coderen en ontwerpen van gedistribueerde systemen, kan ik u en uw klanten helpen om een vlotte ervaring te hebben met uw producten.",
+      "item5": "Met mijn ervaring in het coderen en ontwerpen van gedistribueerde systemen, kan ik u en uw klanten helpen om een vlotte ervaring te hebben met uw producten.",
+      "item6": "Met mijn ervaring in het coderen en ontwerpen van gedistribueerde systemen, kan ik u en uw klanten helpen om een vlotte ervaring te hebben met uw producten.",
+      "yearsLabel": "Jaren van",
+      "successLabel": "Succes"
+    }
+  }
+}

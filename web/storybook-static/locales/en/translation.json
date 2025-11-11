@@ -1,0 +1,90 @@
+{
+  "home": {
+    "hero": {
+      "titleText": "Unleashing Potential with ",
+      "highlightedTitleText": "Software Engineering and AI",
+      "subText": "Explore the power of software engineering and data science with AnasCode. Leveraging innovative technology, rigorous analysis, and creative problem-solving, we transform businesses and drive progress.",
+      "endText": "Let's shape the future together.",
+      "clientsText": "I have worked with",
+      "hireMe": "Hire me",
+      "downloadCV": "Download My CV"
+    },
+    "nav": {
+      "about": "About",
+      "services": "Services",
+      "portfolio": "Portfolio",
+      "blog": "Blog",
+      "testimonials": "Testimonials",
+      "cvResume": "CV/Resume",
+      "hireMe": "Hire me"
+    },
+    "about": {
+      "shortTitle": "About Me",
+      "longTitle": "Discover More About Me",
+      "description": "As a seasoned software engineer, I've spent over a decade designing and implementing solutions across diverse business domains. I bring the experience of leading top-tier technical teams, translating intricate problems into tangible, successful outcomes.",
+      "item1": "Establishing and directing top-tier technical teams",
+      "item2": "A decade of experience in designing and implementing versatile solutions across various industries.",
+      "item3": "Demonstrated proficiency in managing large-scale distributed systems, including multi-tier architectures, application security, monitoring, and storage systems.",
+      "item4": "Leveraging my extensive coding and system design experience, I aim to ensure your products deliver a seamless experience for your customers.",
+      "item5": "Expertise in translating complex business requirements into highly effective technical solutions.",
+      "item6": "Continuous learner, always staying updated with the latest industry trends and technologies to drive innovation and growth.",
+      "yearsLabel": "Years of",
+      "successLabel": "Success"
+    },
+    "services": {
+      "sectionShortTitle": "Services",
+      "sectionLongTitle": "What I Do for Clients",
+      "sectionDescription": "Empowering clients through innovative software engineering and data-driven solutions.",
+      "softwareEngineeringTitle": "Software Engineering",
+      "softwareEngineeringDescription": "Design, development, testing, and maintenance of high-quality software applications.",
+      "dataScienceTitle": "Data Science",
+      "dataScienceDescription": "In-depth analysis, visualization, and interpretation of complex data to help businesses make informed decisions.",
+      "teamLeadTitle": "Team Leadership",
+      "teamLeadDescription": "Steering software development teams towards success with clear direction, insightful guidance, and dynamic leadership.",
+      "saasTitle": "SaaS Solutions",
+      "saasDescription": "Building efficient and scalable Software-as-a-Service applications tailored to your business needs."
+    },
+
+    "achievements": {
+      "shortTitle": "Fun Facts",
+      "longTitle": "Achievements and More",
+      "description": "Proud accomplishments and a dash of geek humor!",
+      "funFacts": {
+        "gitHubStars": "GitHub Stars Received",
+        "complexProblems": "Complex Problems Solved",
+        "highPerformingTeams": "High-Performing Teams Built",
+        "codeCommits": "code commits",
+        "studentsTaught": "Students Taught",
+        "businessesTransformed": "Businesses Transformed with Data"
+      }
+    },
+    "testimonials": {
+      "shortTitle": "Testimonials",
+      "longTitle": "What People Say About Me?",
+      "description": "I've had the pleasure of working with some amazing people and companies. Here's what they have to say about me."
+    },
+    "blog": {
+      "shortTitle": "Blog",
+      "longTitle": "My Latest Blog Posts",
+      "description": "I write about Software Engineering, Data Science & Management",
+      "readMore": "Visit My Blog"
+    },
+    "contact": {
+      "shortTitle": "Contact Us",
+      "longTitle": "Get in Touch",
+      "description": "Let's work together to build something great.",
+      "formTitle": "Send me a message",
+      "formFields": {
+        "fullName": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "message": "Message"
+      },
+      "formSubmitButton": "Send Message",
+      "location": "Amsterdam, The Netherlands 🇳🇱",
+      "email": "contact@anascode.com",
+      "formSubmitted": "Thank you for sending me a message! I will reply to you as soon as possible.",
+      "formSubmitError": "An error occurred while sending your message. Please try again later."
+    }
+  }
+}

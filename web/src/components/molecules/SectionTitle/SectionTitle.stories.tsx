@@ -1,37 +1,48 @@
 import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import SectionTitle from './SectionTitle';
 
-export default {
+const meta: Meta<typeof SectionTitle> = {
   title: 'Components/Molecules/SectionTitle',
   component: SectionTitle,
-  argTypes: {
-    viewport: {
-      defaultValue: 'desktop',
-    },
+  parameters: {
+    layout: 'centered',
   },
 };
 
-const Template = (args) => <SectionTitle {...args} />;
+export default meta;
+type Story = StoryObj<typeof SectionTitle>;
 
-export const Desktop = Template.bind({});
-Desktop.args = {
-  className: 'test-classname',
-  sectionShortTitle: 'About Me',
-  sectionLongTitle: 'Why do you choose me',
-  sectionDescription: 'I am a Lead Software Engineer and data enthusiast who is self motivated, energized and good strategic planner',
-};
-Desktop.parameters = {
-  viewport: { defaultViewport: 'desktop' },
+export const Default: Story = {
+  args: {
+    title: 'Section Title',
+    description: 'This is a section description that provides context.',
+  },
 };
 
-export const Mobile = Template.bind({});
-Mobile.args = {
-  className: 'test-classname',
-  sectionShortTitle: 'About Me',
-  sectionLongTitle: 'Why do you choose me',
-  sectionDescription: 'I am a Lead Software Engineer and data enthusiast who is self motivated, energized and good strategic planner',
+export const WithoutDescription: Story = {
+  args: {
+    title: 'Section Title Only',
+  },
 };
-Mobile.parameters = {
-  viewport: { defaultViewport: 'iphone6' },
+
+export const Desktop: Story = {
+  args: {
+    title: 'Why do you choose me',
+    description: 'I am a Lead Software Engineer and data enthusiast who is self motivated, energized and good strategic planner',
+  },
+  parameters: {
+    viewport: { defaultViewport: 'desktop' },
+  },
+};
+
+export const Mobile: Story = {
+  args: {
+    title: 'Why do you choose me',
+    description: 'I am a Lead Software Engineer and data enthusiast who is self motivated, energized and good strategic planner',
+  },
+  parameters: {
+    viewport: { defaultViewport: 'iphone6' },
+  },
 };

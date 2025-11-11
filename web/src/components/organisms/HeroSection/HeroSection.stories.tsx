@@ -1,27 +1,30 @@
 import React from 'react';
 
+import type { Meta, StoryObj } from '@storybook/react';
+
 import HeroSection from './HeroSection';
 
-export default {
+const meta: Meta<typeof HeroSection> = {
   title: 'Components/Organisms/HeroSection',
   component: HeroSection,
-  argTypes: {
-    viewport: {
-      defaultValue: 'desktop',
-    },
+  parameters: {
+    layout: 'fullscreen',
   },
 };
 
-const Template = (args) => <HeroSection {...args} />;
+export default meta;
+type Story = StoryObj<typeof HeroSection>;
 
-export const Desktop = Template.bind({});
-Desktop.args = {};
-Desktop.parameters = {
-  viewport: { defaultViewport: 'desktop' },
+export const Default: Story = {};
+
+export const Desktop: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'desktop' },
+  },
 };
 
-export const Mobile = Template.bind({});
-Mobile.args = {};
-Mobile.parameters = {
-  viewport: { defaultViewport: 'iphone6' },
+export const Mobile: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'iphone6' },
+  },
 };

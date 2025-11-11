@@ -1,26 +1,44 @@
-import { FC } from 'react';
+import { cn } from '@/lib/utils';
 
-import { Box, Typography } from '@mui/material';
-
-interface Props {
+interface SectionTitleProps {
+  // New simplified API
+  title?: string;
+  description?: string;
+  // Legacy API for backward compatibility
+  sectionShortTitle?: string;
+  sectionLongTitle?: string;
+  sectionDescription?: string;
   className?: string;
-  sectionShortTitle: string;
-  sectionLongTitle: string;
-  sectionDescription: string;
 }
 
-const SectionTitle: FC<Props> = ({ className = '', sectionShortTitle, sectionLongTitle, sectionDescription }) => (
-  <Box className={`${className} flex flex-col items-center mb-16 text-center`}>
-    <Typography variant="subtitle1" component="h3" className={'text-dark-accent font-semibold font-sans'}>
-      {sectionShortTitle}
-    </Typography>
-    <Typography variant="h3" className={'text-brand-color font-sans'}>
-      {sectionLongTitle}
-    </Typography>
-    <Typography variant="subtitle2" component="h4" className={'text-dark-shade font-sans'}>
-      {sectionDescription}
-    </Typography>
-  </Box>
-);
+export default function SectionTitle({
+  title,
+  description,
+  sectionShortTitle,
+  sectionLongTitle,
+  sectionDescription,
+  className,
+}: SectionTitleProps) {
+  // Support both old and new prop names
+  const displayTitle = title || sectionLongTitle || '';
+  const displayDescription = description || sectionDescription;
+  const displaySubtitle = sectionShortTitle;
 
-export default SectionTitle;
+  return (
+    <div className={cn('mb-12 text-center', className)}>
+      {displaySubtitle && (
+        <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground mb-2">
+          {displaySubtitle}
+        </p>
+      )}
+      <h2 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+        {displayTitle}
+      </h2>
+      {displayDescription && (
+        <p className="mt-4 text-balance text-lg text-muted-foreground">
+          {displayDescription}
+        </p>
+      )}
+    </div>
+  );
+}

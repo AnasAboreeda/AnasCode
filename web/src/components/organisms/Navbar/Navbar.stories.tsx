@@ -1,27 +1,28 @@
 import React from 'react';
 
+import type { Meta, StoryObj } from '@storybook/react';
+
 import Navbar from './Navbar';
 
-export default {
+const meta: Meta<typeof Navbar> = {
   title: 'Components/Organisms/Navbar',
   component: Navbar,
-  argTypes: {
-    viewport: {
-      defaultValue: 'desktop',
-    },
+  parameters: {
+    layout: 'fullscreen',
   },
 };
 
-const Template = (args) => <Navbar {...args} />;
+export default meta;
+type Story = StoryObj<typeof Navbar>;
 
-export const Desktop = Template.bind({});
-Desktop.args = {};
-Desktop.parameters = {
-  viewport: { defaultViewport: 'desktop' },
+export const Desktop: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'desktop' },
+  },
 };
 
-export const Mobile = Template.bind({});
-Mobile.args = {};
-Mobile.parameters = {
-  viewport: { defaultViewport: 'iphone6' },
+export const Mobile: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'iphone6' },
+  },
 };

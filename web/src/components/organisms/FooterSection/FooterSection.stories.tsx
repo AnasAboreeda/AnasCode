@@ -1,27 +1,30 @@
 import React from 'react';
 
+import type { Meta, StoryObj } from '@storybook/react';
+
 import FooterSection from './FooterSection';
 
-export default {
+const meta: Meta<typeof FooterSection> = {
   title: 'Components/Organisms/FooterSection',
   component: FooterSection,
-  argTypes: {
-    viewport: {
-      defaultValue: 'desktop',
-    },
+  parameters: {
+    layout: 'fullscreen',
   },
 };
 
-const Template = (args) => <FooterSection {...args} />;
+export default meta;
+type Story = StoryObj<typeof FooterSection>;
 
-export const Desktop = Template.bind({});
-Desktop.args = {};
-Desktop.parameters = {
-  viewport: { defaultViewport: 'desktop' },
+export const Default: Story = {};
+
+export const Desktop: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'desktop' },
+  },
 };
 
-export const Mobile = Template.bind({});
-Mobile.args = {};
-Mobile.parameters = {
-  viewport: { defaultViewport: 'iphone6' },
+export const Mobile: Story = {
+  parameters: {
+    viewport: { defaultViewport: 'iphone6' },
+  },
 };

@@ -59,7 +59,7 @@ export function generateSEO({
       title: pageTitle,
       description: pageDescription,
       images: [ogImage],
-      creator: "@AnasAboureada",
+      creator: "@AnasAboreeda",
     },
     alternates: {
       canonical: pageUrl,

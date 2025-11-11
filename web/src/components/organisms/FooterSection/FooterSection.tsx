@@ -1,40 +1,52 @@
-import Image from 'next/image';
+import { Github, Linkedin, Twitter } from 'lucide-react';
+import Link from 'next/link';
 
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import { Typography } from '@mui/material';
+const socialLinks = [
+  {
+    name: 'GitHub',
+    href: 'https://github.com/AnasAboreeda',
+    icon: Github,
+  },
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/anas-aboreada',
+    icon: Linkedin,
+  },
+  {
+    name: 'Twitter',
+    href: 'https://twitter.com/AnasAboreeda',
+    icon: Twitter,
+  },
+];
 
-const FooterSection = () => {
-  const currentYear = new Date().getFullYear();
-
+export default function Footer() {
   return (
-    <div className="flex flex-col sm:flex-row justify-between items-center py-4 px-2">
-      <div className="mb-2">
-        <Image
-          src="/assets/anascode/logos/anascode-logo-horizontal.jpg"
-          alt="AnasCode Logo"
-          width={200}
-          height={200}
-          className="object-cover"
-        />
-      </div>
-      <Typography variant="body1" className="font-sans text-brand-color my-4">
-        © {currentYear} AnasCode.com - All Rights Reserved
-      </Typography>
-      <div className="flex space-x-2">
-        <a href="https://twitter.com/AnasAboreeda" target='_blank' aria-label='twitter'>
-          <TwitterIcon />
-        </a>
-        <a href="https://github.com/AnasAboreeda" target='_blank' aria-label='github'>
-          <GitHubIcon />
-        </a>
-        <a href="https://www.linkedin.com/in/anasaboreeda/" target='_blank' aria-label='linkedin'>
-          <LinkedInIcon />
-        </a>
-      </div>
-    </div>
-  );
-};
+    <footer className="border-t border-border/40">
+      <div className="container mx-auto max-w-6xl px-4 py-12">
+        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Anas Aboreada. All rights reserved.
+          </p>
 
-export default FooterSection;
+          <div className="flex items-center gap-4">
+            {socialLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground transition-colors hover:text-foreground"
+                  aria-label={link.name}
+                >
+                  <Icon className="h-5 w-5" />
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

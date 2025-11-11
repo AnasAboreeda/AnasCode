@@ -1,9 +1,11 @@
 import './globals.css';
+
 import { Inter } from 'next/font/google';
-import { Analytics } from '@vercel/analytics/react';
+
+import FooterSection from '@/components/organisms/FooterSection/FooterSection';
+import Navbar from '@/components/organisms/Navbar/Navbar';
 import { defaultMetadata } from '@/lib/seo';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -21,9 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="antialiased">
-        <Header />
+        <Navbar />
         <main>{children}</main>
-        <Footer />
+        <FooterSection />
         <Analytics />
       </body>
     </html>
