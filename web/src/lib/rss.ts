@@ -11,7 +11,7 @@ export function buildRssFeed(articles: Article[]): string {
       <guid>${article.canonicalUrl || `${site.url}/articles/${article.slug}`}</guid>
       <pubDate>${new Date(article.date).toUTCString()}</pubDate>
       <description><![CDATA[${article.summary}]]></description>
-      ${article.tags.map((tag) => `<category>${tag}</category>`).join("\n      ")}
+      ${article.tags.map((tag) => `<category><![CDATA[${tag}]]></category>`).join("\n      ")}
     </item>`
     )
     .join("\n");
@@ -19,9 +19,9 @@ export function buildRssFeed(articles: Article[]): string {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${site.title}</title>
+    <title><![CDATA[${site.title}]]></title>
     <link>${site.url}</link>
-    <description>${site.description}</description>
+    <description><![CDATA[${site.description}]]></description>
     <language>en</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${site.url}/rss" rel="self" type="application/rss+xml"/>
