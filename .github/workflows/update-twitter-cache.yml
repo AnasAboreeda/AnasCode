@@ -24,7 +24,11 @@ jobs:
         with:
           version: 9
 
-      - name: Install dependencies
+      - name: Install web dependencies
+        working-directory: ./web
+        run: pnpm install --frozen-lockfile
+
+      - name: Install scripts dependencies
         working-directory: ./scripts
         run: pnpm install --frozen-lockfile
 
