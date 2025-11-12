@@ -1,0 +1,162 @@
+---
+title: 'Simplifying Java with Apache Commons Lang 3 - Practical Examples'
+date: "2024-02-21"
+summary: 'Streamline Your Java Development: Practical Guides to Utilizing Apache Commons Lang 3'
+tags: ["java", "testing"]
+source: "Medium"
+canonicalUrl: "https://medium.com/@anas-aboreeda/simplifying-java-with-apache-commons-lang-3-practical-examples-5ea1bdb085dd"
+published: true
+---
+
+* * *
+
+### Simplifying Java with Apache Commons Lang 3 - Practical Examples
+
+![](https://cdn-images-1.medium.com/max/800/1*ZQXNq2cj9G4VRWkFK6NqwA.png)
+
+Simplifying Java with Apache Commons Lang 3 - Practical Examples
+
+When you're working on a Java project, you often encounter tasks that seem more complicated than they should be. Whether it's dealing with strings, numbers, or dates, Java can sometimes make you write a lot of code for something seemingly simple. That's where the Apache Commons Lang 3 library comes in. It's like a Swiss Army knife for Java developers, packed with tools to make your life easier. Let's explore some of the coolest features of this library and see how it can help you streamline your coding process with practical examples.
+
+### Making String Handling a Breeze
+
+Strings are a fundamental part of almost any programming project, and Apache Commons Lang 3 has a bunch of methods to help you manipulate them easily.
+
+```java
+import org.apache.commons.lang3.StringUtils;
+
+public class StringExamples {
+    public static void main(String[] args) {
+        String str = " Hello World ";
+
+        // Checking if a string is empty or all whitespace
+        System.out.println("Is it empty? " + StringUtils.isEmpty(str)); // false
+        System.out.println("Is it blank? " + StringUtils.isBlank(str)); // false, whitespace counts here!
+
+        // Trimming, reversing, and abbreviating strings
+        System.out.println("Trimmed: " + StringUtils.trim(str)); // "Hello World"
+        System.out.println("Reversed: " + StringUtils.reverse(str)); // " dlroW olleH "
+        System.out.println("Short version: " + StringUtils.abbreviate(str, 10)); // " Hello W..."
+    }
+}
+```
+
+### Generating Random Strings Easily
+
+Need to create a random string for a password or testing? Apache Commons Lang 3 has you covered.
+
+```java
+import org.apache.commons.lang3.RandomStringUtils;
+
+public class RandomStringExamples {
+    public static void main(String[] args) {
+
+        // Generating random alphanumeric strings
+        System.out.println("Random Alphanumeric: " + RandomStringUtils.randomAlphanumeric(10));
+
+        // Just numbers
+        System.out.println("Random Numeric: " + RandomStringUtils.randomNumeric(5));
+    }
+}
+```
+
+### Simplifying Object and Class Interactions
+
+Working with objects and needing default values or null checks can clutter your code. Here's how Apache Commons Lang 3 simplifies it.
+
+```java
+import org.apache.commons.lang3.ObjectUtils;
+
+public class ObjectUtilsExamples {
+    public static void main(String[] args) {
+        String str = null;
+        // No more NullPointerExceptions!
+        System.out.println("Default String: " + ObjectUtils.defaultIfNull(str, "defaultString"));
+
+        // Easily find the first non-null object
+        String firstNonNull = ObjectUtils.firstNonNull(null, null, "firstNonNull", "second");
+        System.out.println("First non-null: " + firstNonNull);
+    }
+}
+```
+
+### Reflection Without the Headache
+
+Reflection is powerful in Java but can be tricky. Apache Commons Lang 3 makes it more accessible.
+
+```java
+import org.apache.commons.lang3.reflect.FieldUtils;
+
+public class ReflectionExamples {
+    private String secret = "shh";
+
+    public static void main(String[] args) throws IllegalAccessException {
+        ReflectionExamples example = new ReflectionExamples();
+        // Access and modify private fields safely
+        String secretValue = (String) FieldUtils.readField(example, "secret", true);
+        System.out.println("Secret value: " + secretValue);
+
+        FieldUtils.writeField(example, "secret", "not a secret anymore", true);
+        secretValue = (String) FieldUtils.readField(example, "secret", true);
+        System.out.println("Modified secret value: " + secretValue);
+    }
+}
+```
+
+### Handling Numbers More Intuitively
+
+Whether it's converting strings to numbers or dealing with numeric comparisons, here's a simpler way.
+
+```java
+import org.apache.commons.lang3.math.NumberUtils;
+
+public class NumberUtilsExamples {
+    public static void main(String[] args) {
+
+        // Finding the max of a series of numbers
+        System.out.println("Max: " + NumberUtils.max(new int[]{1, 3, 2}));
+
+        // Checking if a string is a valid number
+        System.out.println("Is '123.45' a number? " + NumberUtils.isCreatable("123.45"));
+
+        // Converting a string to a number with a default value
+        System.out.println("Convert to int: " + NumberUtils.toInt("100", 0));
+    }
+}
+```
+
+### Date Manipulation Made Easy
+
+Working with dates in Java can get complicated fast. Apache Commons Lang 3 offers tools to add, subtract, and round dates without the headache.
+
+```javaimport org.apache.commons.lang3.time.DateUtils;
+import java.util.Date;
+
+public class DateExamples {
+    public static void main(String[] args) {
+
+        Date today = new Date();
+        System.out.println("Today: " + today);
+
+        // Adding days to a date
+        Date future = DateUtils.addDays(today, 5);
+        System.out.println("Five days from now: " + future);
+
+        // Truncating a date to the start of the day
+        Date startOfDay = DateUtils.truncate(today, java.util.Calendar.DAY_OF_MONTH);
+        System.out.println("Start of today: " + startOfDay);
+    }
+}
+
+### Wrapping Up
+
+The Apache Commons Lang 3 library is a toolkit every Java developer should have in their arsenal. It simplifies many of the common tasks and challenges you face in Java, making your code cleaner, more readable, and easier to maintain. By incorporating these examples into your projects, you can reduce the amount of boilerplate code you write and spend more time focusing on the unique aspects of your applications.
+
+Happy coding!
+
+—
+
+Read more about it's interesting features here:
+
+[**Common Java Skill: Multiple Return Values like Go**
+*In our daily routine of coding, it is often the case that a method needs to return more than one value, and you write a…*medium.com](https://medium.com/@malvin.lok/common-java-skill-multiple-return-values-like-go-c11b7f9875c0 "https://medium.com/@malvin.lok/common-java-skill-multiple-return-values-like-go-c11b7f9875c0")[](https://medium.com/@malvin.lok/common-java-skill-multiple-return-values-like-go-c11b7f9875c0)

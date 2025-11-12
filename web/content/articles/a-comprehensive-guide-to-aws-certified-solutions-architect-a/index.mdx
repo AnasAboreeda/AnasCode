@@ -1,0 +1,471 @@
+---
+title: 'A Comprehensive Guide to AWS Certified Solutions Architect - Associate Certification - part 2'
+date: "2024-05-31"
+summary: 'Your guide to AWS Certified Solutions Architect - Part 2, focusing on AWS Compute Services like EC2, ECS, Lambda, and more'
+tags: ["java", "microservices", "security", "aws", "architecture"]
+source: "Medium"
+canonicalUrl: "https://medium.com/@anas-aboreeda/a-comprehensive-guide-to-aws-certified-solutions-architect-associate-certification-part-2-9dc15246c059"
+published: true
+---
+
+* * *
+
+### A Comprehensive Guide to AWS Certified Solutions Architect - Associate Certification - part 2
+
+![Your Guide to AWS Certified Solutions Architect | Anas Aboreeda](https://cdn-images-1.medium.com/max/800/1*BvVwRP3QkDvbW3mBqgN3dQ.png)
+
+Your Guide to AWS Certified Solutions Architect
+
+Welcome to Part 2 of our comprehensive guide to the AWS Certified Solutions Architect - Associate Certification. In [the first part](https://anas-aboreeda.medium.com/a-comprehensive-guide-to-aws-solutions-architect-certification-part-1-d64110324780), we explored the foundational aspects of AWS infrastructure and IAM services. Now, we move into AWS Compute Services.
+
+This part will cover ***AWS Compute Services***.
+
+Join us as we continue our journey, providing detailed study notes, practical tips, and insights to help you succeed. Let's dive in and master these concepts together!
+
+* * *
+
+### AWS EC2 (Elastic Compute Cloud)
+
+Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizable compute capacity in the cloud, designed to make web-scale computing easier for developers. EC2 supports a variety of operating systems, including Amazon Linux, Ubuntu, Windows Server, Red Hat Enterprise Linux, SUSE Linux Enterprise Server, MacOS, and more, giving you full control at the operating system layer.
+
+#### Instance Limits
+
+By default, you are limited to:
+
+- Running up to 20 On-Demand instances across the instance family.
+- Purchasing 20 Reserved Instances.
+- Requesting Spot Instances per your dynamic spot limit per region.
+
+#### EC2 Compute Units (ECU)
+
+ECUs provide a relative measure of an Amazon EC2 instance's integer processing power.
+
+#### Key Pairs
+
+Key pairs are used to securely connect to EC2 instances. A key pair consists of:
+
+- A public key stored by AWS.
+- A private key file stored by you.
+
+For Windows AMIs, the private key file is required to obtain the password used to log into your instance. For Linux AMIs, it allows you to securely SSH into your instance.
+
+#### Metadata and User Data
+
+- **User Data**: Supplied at instance launch in the form of a script, limited to 16KB and not encrypted.
+- **Instance Metadata**: Available at `http://169.254.169.254/latest/meta-data/`, used to configure or manage the running instance. The IP address `169.254.169.254` is a link-local address valid only from the instance.
+
+### Billing and Provisioning
+
+#### On-Demand Instances
+
+- Pay for hours used with no commitment.
+- Ideal for Auto Scaling groups and unpredictable workloads.
+- Good for development and testing.
+
+#### Spot Instances
+
+- Take advantage of unused EC2 capacity at up to 90% discount compared to on-demand prices.
+- Ideal for stateless, fault-tolerant, or flexible applications.
+- Receive a two-minute interruption notice before being reclaimed by EC2.
+- Diversify across multiple capacity pools to reduce the impact of interruptions.
+
+#### Reserved Instances (RIs)
+
+- **Standard**: 1 or 3-year commitment, charged whether the instance is on or off.
+- **Convertible**: Can change the attributes of the RI, given the resulting RI is equal or greater in value.
+- **Scheduled**: Reserved for specific periods; accrue charges hourly, billed monthly over the term (1 year).
+
+RIs are ideal for steady-state workloads and predictable usage. Upfront payments reduce the hourly rate. They can be used in Auto Scaling Groups and Placement Groups.
+
+**Instance Type Modifications**: Supported for Linux only. Windows RIs cannot change the instance size.
+
+**Sharing RIs**: Can be shared across multiple accounts within Consolidated Billing. If not needed, RIs can be sold on the Reserved Instance Marketplace.
+
+**RI Attributes**:
+
+- **Instance Type**: CPU, memory, and networking capability.
+- **Platform**: Linux, SUSE Linux, RHEL, Microsoft Windows, Microsoft SQL Server.
+- **Tenancy**: Default (shared) or Dedicated.
+- **Availability Zone (optional)**: Zonal RI offers a discount and reservation in a specific AZ. Regional RI applies a discount to any instance in the family in any AZ in the region without reservation.
+
+### Dedicated Hosts
+
+Dedicated hosts are physical servers dedicated just for your use, giving you control over which instances are deployed on that host. Available as On-Demand or with Dedicated Host Reservation, they are useful if you have server-bound software licenses that use metrics like per-core, per-socket, or per-VM. Each dedicated host can only run one EC2 instance size and type, ensuring predictable performance and complete isolation.
+
+**Billing**:
+
+- Most expensive option.
+- Billing is per host.
+
+### Dedicated Instances
+
+Dedicated instances are virtualized instances on hardware just for you, using physically dedicated EC2 servers. However, they do not provide the additional visibility and controls of dedicated hosts (e.g., how instances are placed on a server). Available as On-Demand, Reserved Instances, and Spot Instances, they may share hardware with other non-dedicated instances in the same account.
+
+**Billing**:
+
+- Costs an additional $2 per hour per region.
+- Billing is per host.
+
+#### Instance Naming Convention
+
+![Instance Naming Convention](https://cdn-images-1.medium.com/max/800/1*njEUFcD0xAUn16TxVaoKuQ.png)
+
+### Amazon Machine Image (AMI)
+
+- An AMI includes the operating system, storage mapping, architecture type, launch permissions, and any additional preinstalled software applications.
+- EC2 instances are live instantiations (or versions) of what is defined in an AMI, as a cake is a live instantiation of a cake recipe.
+
+![](https://cdn-images-1.medium.com/max/800/1*OiPgwVIFIHqfCpX5XxJP8g.png)
+
+* * *
+
+### AWS FARGATE
+
+- **Serverless Compute Engine:** AWS Fargate allows you to run containers without managing servers or clusters.
+- **Seamless Scaling:** Automatically scales resources based on your application's needs.
+- **Cost Efficiency:** Pay only for the resources you use during active operations.
+    \- **Enhanced Security:** Each Fargate task runs in its own isolated environment.
+    \- **Integration:** Works with both Amazon ECS and Amazon EKS for container orchestration.
+
+For more details, visit the [AWS Fargate page](https://aws.amazon.com/fargate/)
+
+![AWS FARGATE](https://cdn-images-1.medium.com/max/800/1*nu3rTjH6G5MCGe1vmX7TZQ.png)
+
+* * *
+
+### AWS ECS (Elastic Container Service)
+
+- **Amazon ECS Overview:** Amazon ECS is a container orchestration service for deploying and managing containers.
+- **Task Definitions:** Define containers in a JSON task definition for individual tasks or tasks within a service.
+- **Deployment Options:** Run tasks on serverless AWS Fargate or manage infrastructure with EC2 instances.
+- **Container Instances:** EC2 instances with the ECS agent installed, communicating with ECS for cluster management.
+- **Functionality:** Includes launching/stopping containers, scaling, scheduling, and assigning permissions.
+
+> A container is more lightweight than VM. Containers spin up quicker, almost instantly. This difference in startup time becomes instrumental when designing applications that must scale quickly during I/O bursts.
+
+For more details, visit the [AWS ECS page](https://aws.amazon.com/ecs/).
+
+![](https://cdn-images-1.medium.com/max/800/1*S575MzkXNPC617A7e606SQ.png)
+
+![](https://cdn-images-1.medium.com/max/800/1*vZjPkMIhS71-rp32OtiRLw.png)
+
+#### Running an App on ECS
+
+To prepare your application to run on Amazon ECS, you create a task definition.
+
+```json
+{
+ "family": "webserver",
+ "containerDefinitions": [ {
+    "name": "web",
+    "image": "nginx",
+    "memory": "100",
+    "cpu": "99"
+ } ],
+ "requiresCompatibilities": [ "FARGATE" ],
+ "networkMode": "awsvpc",
+ "memory": "512",
+ "cpu": "256"
+}
+```
+
+#### ECS Service Scheduler
+
+Amazon ECS provides a service scheduler (for long-running tasks and applications), **the ability to run tasks manually (for batch jobs or single run tasks),** with Amazon ECS placing tasks on your cluster for you.
+
+You can specify task placement strategies and constraints that allow you to run tasks in the configuration you choose, such as spread out across Availability Zones. It is also possible to integrate with custom or third-party schedulers.
+
+#### Auto-scaling
+
+Amazon ECS Service Auto Scaling supports both **step scaling policies** and **target tracking scaling policies**, but *AWS recommends using target tracking scaling policies*.
+
+- **Target Tracking Scaling Policies:** Automatically adjust scaling based on metrics like CPU utilization. Ideal for standard use cases.
+- **Step Scaling Policies:** Require manual creation and management of CloudWatch alarms for scaling actions. Suitable if target tracking alarms are insufficient.
+- **Combined Use:** Both policies can be used together for advanced configurations, allowing for more aggressive scaling responses.
+
+**Key Points:**
+
+- Target tracking is generally preferred for its intelligence in adjusting scaling based on needs.
+- Step scaling offers granular control with multiple threshold ranges.
+- Combination of both can provide advanced and aggressive scaling strategies.
+
+* * *
+
+### Amazon EKS (Elastic Kubernetes Service)
+
+- **Amazon EKS Overview:** Amazon EKS is a managed service for running Kubernetes on AWS without managing the control plane or nodes.
+- **Benefits:** Amazon EKS provides simplicity, high availability, and fine-grained control for managing Kubernetes workloads on AWS.
+
+#### Differences from ECS:
+
+- In ECS, containers run on EC2 instances with ECS agents (container instances).
+- In EKS, containers run on Kubernetes worker nodes.
+     ECS containers are called tasks; EKS containers are called pods.
+- ECS uses AWS native technology; EKS uses Kubernetes.
+
+For more details, visit the [Amazon EKS page.](https://aws.amazon.com/eks/)
+
+* * *
+
+### AWS Lambda
+
+- Serverless compute service on AWS.
+- Allows packaging and uploading code as Lambda functions.
+- Functions run in response to triggers (e.g., HTTP requests, S3 uploads, events from AWS services).
+
+#### Function Triggers
+
+- Triggers initiate Lambda function execution.
+- Examples include HTTP requests, S3 uploads, and mobile device activity.
+- New triggers are continuously added by AWS.
+
+#### Environment and Scalability
+
+- Managed, scalable, highly available environment.
+- No need to manage the underlying infrastructure.
+- Functions can be written in various languages, with configurable memory, CPU, permissions, and dependencies.
+- **Scales automatically** based on incoming triggers.
+
+#### Use Cases and Limitations
+
+- Designed for short-running processes (under 15 minutes).
+- Suitable for web backends, report processing, microservices.
+- Not suitable for long-running processes like deep learning or batch jobs.
+- **Cost-effective:** billed only for running code, rounded to the nearest millisecond.
+
+#### Key Lambda Concepts
+
+#### Function
+
+- Resource that processes events.
+- Can be created from scratch, blueprint, container image, or serverless repository.
+
+#### Trigger
+
+- Defines when a function should run, integrating with AWS services.
+
+#### Event
+
+- JSON-formatted document containing data for processing.
+
+#### Application Environment
+
+- Secure, isolated runtime environment for functions.
+
+#### Deployment Package
+
+- Contains function code and dependencies.
+- Two types:
+     - ZIP file
+     - Container image
+
+#### Runtime
+
+- Language-specific environment for function code (e.g., Python, Java).
+
+#### Lambda Function Handler
+
+- Method in function code that processes events.
+
+```python
+def handler_name(event, context):
+  ...
+  return some_value
+```
+
+* * *
+
+### AWS Batch
+
+#### Fully Managed Batch Processing Service
+
+AWS Batch enables you to run batch computing workloads on the AWS Cloud. It dynamically provisions the optimal quantity and type of compute resources based on the volume and specific resource requirements of the batch jobs submitted.
+
+#### Seamless Integration with AWS Services
+
+AWS Batch integrates seamlessly with other AWS services such as AWS IAM, Amazon S3, Amazon RDS, Amazon VPC, and AWS CloudTrail. This allows for efficient and secure processing of batch jobs.
+
+#### Job Definitions
+
+You can define jobs in AWS Batch, specifying parameters such as the Docker image, vCPUs, memory requirements, job role, and environment variables. This ensures consistent and reproducible job configurations.
+
+#### Job Queues
+
+AWS Batch allows you to create job queues where jobs are submitted and from where they are picked up for execution. You can prioritize jobs by associating multiple queues with different priorities.
+
+#### Compute Environments
+
+Compute environments in AWS Batch are where your jobs are executed. You can manage multiple environments with different instance types, purchase options (On-Demand, Spot Instances), and scaling configurations to optimize cost and performance.
+
+#### Efficient Resource Utilization
+
+AWS Batch dynamically scales compute resources based on job requirements and volume. It provisions, scales, and terminates instances as needed, ensuring efficient resource utilization and cost-effectiveness.
+
+#### Support for Docker Containers
+
+AWS Batch supports Docker containers, allowing you to package your application and dependencies into a single, portable container. This ensures consistency across different environments and simplifies dependency management.
+
+#### Automated Job Scheduling
+
+AWS Batch automatically schedules jobs in queues based on priority and available resources. It ensures that jobs are executed efficiently and in the order of their priority, optimizing throughput and resource utilization.
+
+#### High Availability
+
+AWS Batch ensures high availability by automatically replacing unhealthy instances and distributing jobs across multiple Availability Zones. This minimizes downtime and ensures reliable execution of batch workloads.
+
+#### Monitoring and Logging
+
+AWS Batch integrates with Amazon CloudWatch to provide monitoring and logging capabilities. You can track the status of jobs, view logs, and set up alarms to receive notifications for specific events or thresholds.
+
+#### Cost Management
+
+AWS Batch is cost-effective, allowing you to use Spot Instances to reduce costs further. You only pay for the resources consumed by your jobs, without any upfront fees or commitments.
+
+* * *
+
+### Amazon Lightsail
+
+#### Simplified Virtual Private Server (VPS)
+
+Amazon Lightsail offers a straightforward way to launch and manage virtual private servers (VPS) with an intuitive interface. It is designed for users who need an easy-to-use cloud platform.
+
+#### Fixed Pricing
+
+Lightsail uses a simple and predictable pricing model. Plans include a set amount of resources such as memory, processing, storage, and data transfer allowances, making it easier to manage costs.
+
+#### Pre-configured Templates
+
+Lightsail provides pre-configured templates for common applications, such as WordPress, Magento, and LAMP stack. This feature enables quick and hassle-free deployment of applications.
+
+#### Integration with AWS Services
+
+Although designed for simplicity, Lightsail instances can integrate with other AWS services like S3, RDS, and CloudFront. This allows for more advanced functionality and scalability.
+
+#### Resource Management
+
+Lightsail simplifies resource management, including networking (static IPs, DNS management), storage (block storage), and snapshots for backups. This helps users easily handle their infrastructure needs.
+
+#### Load Balancing and Scaling
+
+Built-in load balancing and the ability to scale applications by adding more instances are available in Lightsail. This ensures better performance and availability for your applications.
+
+#### Ease of Use
+
+Designed for developers, small businesses, and others who need a simplified cloud experience, Lightsail removes the complexity of managing multiple AWS services. It offers an easy entry point to the cloud.
+
+#### Security Features
+
+Lightsail includes security features such as SSH key management, firewall settings, and automatic updates. These features help maintain secure operations for your applications.
+
+#### Monitoring and Alerts
+
+Basic monitoring and alerting are provided to keep track of the health and performance of Lightsail instances. This ensures that you can maintain optimal performance and quickly address any issues.
+
+#### Cost-Effective Solution
+
+Lightsail is ideal for small applications, websites, and test environments due to its low-cost and predictable billing. It offers a cost-effective solution for users who need a reliable cloud platform without a significant investment.
+
+* * *
+
+### AWS App Runner
+
+#### Fully Managed Service
+
+AWS App Runner simplifies deploying containerized web applications and APIs, managing infrastructure and scaling automatically.
+
+#### Easy Deployment
+
+Deploy directly from source code repositories or container image registries with minimal configuration.
+
+#### Integration with AWS
+
+Integrates seamlessly with AWS services like IAM, VPC, CloudWatch, and Secrets Manager for enhanced security and monitoring.
+
+#### Automated Scaling
+
+Automatically scales applications based on traffic, ensuring optimal performance and resource utilization.
+
+#### Secure by Default
+
+Provides HTTPS endpoints, automatic TLS termination, and integration with AWS WAF for enhanced security.
+
+#### Continuous Deployment
+
+Supports continuous integration and deployment (CI/CD) workflows for automated updates and version control.
+
+#### Monitoring and Logging
+
+Integrates with CloudWatch for real-time monitoring, logging, and setting up alarms to track application performance.
+
+#### Cost Management
+
+Pay only for the resources used, with no upfront fees or long-term commitments, making it cost-effective.
+
+#### Simplified Operations
+
+Reduces the need for infrastructure management, allowing developers to focus on code rather than operations.
+
+### Key Differences Between AWS APP Runner and AWS Lightsail
+
+#### Deployment and Management
+
+- **App Runner**: Focuses on containerized applications, handling deployment and scaling automatically.
+- **Lightsail**: Offers a simpler VPS solution with pre-configured templates for common applications.
+
+#### Pricing Model
+
+- **App Runner**: Pay-per-use with no upfront fees, ideal for dynamic workloads.
+- **Lightsail**: Fixed pricing with predictable costs, suitable for small applications and steady workloads.
+
+#### Target Users
+
+- **App Runner**: Aimed at developers needing seamless deployment and scaling of containerized applications.
+- **Lightsail**: Geared towards small businesses and developers needing an easy-to-use VPS with predictable pricing.
+
+#### Integration and Features
+
+- **App Runner**: Strong integration with AWS services and advanced features like CI/CD support.
+- **Lightsail**: Basic integration with AWS services, focusing on ease of use and quick setup.
+
+* * *
+
+### Summary and Comparison of AWS Compute Services
+
+#### Instances (virtual machines)
+
+- [Amazon Elastic Compute Cloud (Amazon EC2)](https://aws.amazon.com/ec2/) - Secure and resizable compute capacity (virtual servers) in the cloud
+- [Amazon EC2 Spot Instances](https://aws.amazon.com/ec2/spot/) - Run fault-tolerant workloads for up to 90% off
+- [Amazon EC2 Auto Scaling](https://aws.amazon.com/ec2/autoscaling/) - Automatically add or remove compute capacity to meet changes in demand
+- [Amazon Lightsail](https://aws.amazon.com/lightsail/) - Easy-to-use cloud platform that offers you everything you need to build an application or website
+- [AWS Batch](https://aws.amazon.com/batch/) - Fully managed batch processing at any scale
+
+#### Containers
+
+- [Amazon Elastic Container Service (Amazon ECS)](https://aws.amazon.com/ecs/) - Highly secure, reliable, and scalable way to run containers
+- [Amazon ECS Anywhere](https://aws.amazon.com/ecs/anywhere/) - Run containers on customer managed infrastructure
+- [Amazon Elastic Container Registry (Amazon ECR)](https://aws.amazon.com/ecr/) - Easily store, manage, and deploy container images
+- [Amazon Elastic Kubernetes Service (Amazon EKS)](https://aws.amazon.com/eks/) - Fully managed Kubernetes service
+- [Amazon EKS Anywhere](https://aws.amazon.com/eks/) - Create and operate Kubernetes clusters on your own infrastructure
+- [AWS Fargate](https://aws.amazon.com/fargate/) - Serverless compute for containers
+- [AWS App Runner](https://aws.amazon.com/apprunner/) - Build and run containerized applications on a fully managed service
+
+#### Serverless
+
+- [AWS Fargate](https://aws.amazon.com/fargate/) - Serverless compute for containers
+- [AWS Lambda](https://aws.amazon.com/lambda/) - Run code without thinking about servers. Pay only for the compute time you consume.
+
+#### Edge and hybrid
+
+- [AWS Outposts](https://aws.amazon.com/outposts/) - Run AWS infrastructure and services on premises for a truly consistent hybrid experience
+- [AWS Snow Family](https://aws.amazon.com/snow/) - Collect and process data in rugged or disconnected edge environments
+- [AWS Wavelength](https://aws.amazon.com/wavelength/) - Deliver ultra-low latency application for 5G devices
+- [VMware Cloud on AWS](https://aws.amazon.com/vmware/) - Preferred service for all vSphere workloads to rapidly extend and migrate to the cloud
+- [AWS Local Zones](https://aws.amazon.com/about-aws/global-infrastructure/localzones/) - Run latency sensitive applications closer to end-users
+
+#### Cost and capacity management
+
+- [AWS Savings Plan](https://aws.amazon.com/savingsplans/) - Flexible pricing model that provides savings of up to 72% on AWS compute usage
+- [AWS Compute Optimizer](https://aws.amazon.com/compute-optimizer/) - Recommends optimal AWS compute resources for your workloads to reduce costs and improve performance
+- [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/) - Easy-to-use service for deploying and scaling web applications and services
+- [EC2 Image Builder](https://aws.amazon.com/image-builder/) - Build and maintain secure Linux or Windows Server images
+- [Elastic Load Balancing (ELB)](https://aws.amazon.com/elasticloadbalancing/) - Automatically distribute incoming application traffic across multiple targets

@@ -1,18 +1,12 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 
-const siteName = "Anas Aboreeda";
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://anascode.com";
-const defaultTitle = "Anas Aboreeda | Engineering Leader & AI Architect";
-const defaultDescription =
-  "Principal Software Engineer and Engineering Manager building AI platforms that ship, scale, and earn trust. AWS, Kubernetes, modern data stacks, governance, reliability.";
+import { Article } from "@/content/articles";
+import { site } from "@/content/site";
 
-/**
- * Generate SEO metadata for pages
- */
-export function generateSEO({
+export function buildMetadata({
   title,
   description,
-  path = "/",
+  path = "",
   image,
   noIndex = false,
 }: {
@@ -22,29 +16,31 @@ export function generateSEO({
   image?: string;
   noIndex?: boolean;
 }): Metadata {
-  const pageTitle = title ? `${title} | ${siteName}` : defaultTitle;
-  const pageDescription = description || defaultDescription;
-  const pageUrl = `${siteUrl}${path}`;
-  const ogImage = image || `${siteUrl}/og-image.png`;
+  const pageTitle = title ? `${title} | ${site.title}` : site.title;
+  const pageDescription = description || site.description;
+  const url = `${site.url}${path}`;
+  const ogImage = image || `${site.url}/og-default.png`;
 
   return {
     title: pageTitle,
     description: pageDescription,
-    robots: noIndex
-      ? {
-        index: false,
-        follow: false,
-      }
-      : {
-        index: true,
-        follow: true,
+    authors: [{ name: site.author.name, url: site.url }],
+    creator: site.author.name,
+    publisher: site.author.name,
+    robots: noIndex ? "noindex, nofollow" : "index, follow",
+    alternates: {
+      canonical: url,
+      types: {
+        "application/rss+xml": `${site.url}/rss`,
       },
+    },
     openGraph: {
       type: "website",
-      url: pageUrl,
+      locale: "en_US",
+      url,
       title: pageTitle,
       description: pageDescription,
-      siteName,
+      siteName: site.title,
       images: [
         {
           url: ogImage,
@@ -59,15 +55,68 @@ export function generateSEO({
       title: pageTitle,
       description: pageDescription,
       images: [ogImage],
-      creator: "@AnasAboreeda",
-    },
-    alternates: {
-      canonical: pageUrl,
     },
   };
 }
 
-/**
- * Default metadata for the site
- */
-export const defaultMetadata: Metadata = generateSEO({});
+export function buildArticleJsonLd(article: Article): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    datePublished: article.date,
+    author: {
+      "@type": "Person",
+      name: site.author.name,
+      url: site.url,
+    },
+    publisher: {
+      "@type": "Person",
+      name: site.author.name,
+    },
+    description: article.summary,
+    mainEntityOfPage: article.canonicalUrl || `${site.url}/articles/${article.slug}`,
+    keywords: article.tags.join(", "),
+  };
+}
+
+export function buildPersonJsonLd(): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: site.author.name,
+    url: site.url,
+    email: site.author.email,
+    jobTitle: "Software Engineer",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: site.author.location,
+    },
+  };
+}
+
+export function buildBreadcrumbJsonLd(items: Array<{ name: string; url: string }>): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${site.url}${item.url}`,
+    })),
+  };
+}
+
+export function buildArticleListJsonLd(articles: Article[]): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: articles.map((article, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: article.canonicalUrl || `${site.url}/articles/${article.slug}`,
+      name: article.title,
+    })),
+  };
+}

@@ -1,0 +1,65 @@
+---
+title: 'How to solve the “Fibonacci Number modulo M” Problem in Java'
+date: "2022-01-17"
+summary: '“ Large Fibonacci Number modulo M”'
+tags: ["java"]
+source: "Medium"
+canonicalUrl: "https://medium.com/@anas-aboreeda/solution-of-fibonacci-number-modulo-m-problem-in-java-fac11fbce187"
+published: true
+---
+
+* * *
+
+### How to solve the “Large Fibonacci Number modulo M” Problem in Java
+
+![Fibonacci numbers](https://cdn-images-1.medium.com/max/800/1*5K99UCTWypVMOh3qXXQ0ww.jpeg)
+
+### ***Problem Description***
+
+Given two integers 𝑛 and 𝑚, output 𝐹𝑛 mod 𝑚 (that is, the remainder of 𝐹𝑛 when divided by 𝑚).
+
+***Input Format.*** The input consists of two integers 𝑛 and 𝑚 given on the same line (separated by a space).
+
+***Constraints.*** 1 ≤ 𝑛 ≤ 10^18, 2 ≤ 𝑚 ≤ 10^5.
+
+***Output Format.*** Output 𝐹𝑛 mod 𝑚.
+
+#### ***Sample 1.***
+
+*Input:* 239 1000
+
+*Output:* 161
+
+𝐹(239) mod 1000 = 39 679 027 332 006 820 581 608 740 953 902 289 877 834 488 152 161 (mod 1000) = 161.
+
+#### ***Sample 2.***
+
+*Input:* 2816213588 239
+
+*Output:* 151
+
+𝐹 (2816213588) does not fit into one page of this file, but 𝐹(2816213588) mod 239 = 151.
+
+### Solution
+
+#### Background
+
+In this problem, your goal is to compute 𝐹𝑛 modulo 𝑚, where 𝑛 may be really huge: up to 10¹⁸. For such values of 𝑛, an algorithm looping for 𝑛 iterations will not fit into one second for sure. Therefore we need to avoid such a loop.
+
+To get an idea of how to solve this problem without going through all 𝐹𝑖 for 𝑖 from 0 to 𝑛, let's see what happens when 𝑚 is small - say, 𝑚 = 2 or 𝑚 = 3.
+
+![](https://cdn-images-1.medium.com/max/800/1*msXCuI5Kq1CnET5vHsnAtQ.jpeg)
+
+Fibonacci number mod 2 and mod 3
+
+Take a detailed look at this table. Do you see? Both these sequences are periodic! For 𝑚 = 2, the period is 011 and has length 3, while for 𝑚 = 3 the period is 01120221 and has length 8. Therefore, to compute, say, 𝐹 (2015) mod 3 we just need to find the remainder of 2015 when divided by 8. Since 2015 = 251 * 8 + 7, we conclude that 𝐹(2015) mod 3 = 𝐹(7) mod 3 = 1.
+
+This is true in general: for any integer 𝑚 ≥ 2, the sequence 𝐹𝑛 mod 𝑚 is periodic. The period always starts with 01 and is known as the [Pisano period](https://en.wikipedia.org/wiki/Pisano_period).
+
+#### Solution
+
+In this solution, you can find the Naive solution and also a Fast solution for this problem. The naive solution is quite straightforward, you just calculate the Fibonacci number using the table look method, then you calculate the mod (m) of it. The fast solution on the other side is using the information in the mathematical background. First, we calculate the Pisano Period for the m number, then we use it to calculate the Fibonacci number and return its modulo.
+
+### Solution Test
+
+Please follow me for more problems solutions and interesting technical writings.

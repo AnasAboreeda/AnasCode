@@ -1,0 +1,219 @@
+---
+title: 'A Comprehensive Guide to AWS Solutions Architect Certification - part 1'
+date: "2024-05-27"
+summary: 'Prepare for the AWS Solutions Architect certification with our comprehensive guide, including study notes and best practices.'
+tags: ["security", "aws", "architecture", "cloud", "best-practices"]
+source: "Medium"
+canonicalUrl: "https://medium.com/@anas-aboreeda/a-comprehensive-guide-to-aws-solutions-architect-certification-part-1-d64110324780"
+published: true
+---
+
+* * *
+
+### A Comprehensive Guide to AWS Certified Solutions Architect - Associate Certification - part 1
+
+![A Comprehensive Guide to AWS Certified Solutions Architect](https://cdn-images-1.medium.com/max/800/1*BvVwRP3QkDvbW3mBqgN3dQ.png)
+
+A Comprehensive Guide to AWS Certified Solutions Architect
+
+The cloud computing landscape is vast and ever-changing, with AWS (Amazon Web Services) leading the charge. For those eager to expand their expertise and boost their career, the AWS Certified Solutions Architect - Associate certification is a game-changer. This certification validates your skills and teaches you how to design and deploy scalable systems on AWS.
+
+To help you on this journey, this series will share detailed study notes, insights, and practical tips.
+
+In this first part, we'll explore the foundational aspects of AWS infrastructure and core services, setting the groundwork for more advanced topics. Join us as we break down key concepts and best practices every aspiring Solutions Architect should know. Let's dive into Part 1 of our AWS study guide and start this exciting journey together.
+
+Don't forget to subscribe for updates on the next parts of this series!
+
+### AWS Global Infra
+
+- **Regions**: Geographic locations worldwide where AWS hosts its data centers.
+- **Availability Zones (AZs)**: Each region contains two or more AZs that are isolated from other regions to ensure redundancy and data sovereignty.
+- **Edge Locations**: Global locations where content is cached and delivered at low latency to users, used by CloudFront. There are currently over 400 edge locations globally.
+- **Global Edge Locations**: Larger caches that sit between AWS services and Edge Locations, part of the CloudFront network.
+
+![AWS Availability Zones](https://cdn-images-1.medium.com/max/800/1*DRnn58pxKpteP08peQDMrQ.png)
+
+AWS Regions and availability Zones
+
+![AWS Edge Locations](https://cdn-images-1.medium.com/max/800/1*UTY4jsm2mN44yYezaOojUg.png)
+
+AWS Edge Locations
+
+#### Scope of AWS services
+
+Depending on the AWS service that you use, your resources are either deployed at the Availability Zone, Region, or Global level. Each service is different, so you must understand how the scope of a service might affect your application architecture.
+
+### Amazon CloudFront
+
+- **Amazon CloudFront** delivers your content through a worldwide network of edge locations.
+- When a user requests content that is being served with ***CloudFront****,* the request is routed to the location that provides the lowest latency.
+- ***CloudFront*** speeds up the distribution of your content by routing each user request through the AWS backbone network to the edge location that can best serve your content.
+
+> **Protecting the AWS Root User**
+
+> Root User should not be used at all as it has access to everything in the cloud
+> To ensure the safety of the root user, follow these best practices:
+
+> - Choose a strong password for the root user.
+> - Enable multi-factor authentication (MFA) for the root user.
+> - Never share your root user password or access keys with anyone.
+> - Disable or delete the access keys associated with the root user.
+> - Create an Identity and Access Management (IAM) user for administrative tasks or everyday tasks.
+
+* * *
+
+### AWS IAM (Identity and Access Management)
+
+![](https://cdn-images-1.medium.com/max/800/1*fyeF409XfHyulki9bUjGQA.png)
+
+AWS IAM (Identity and Access Management)
+
+#### **IAM User**
+
+an IAM user represents a person or service that interacts with AWS.
+
+#### **IAM Groups:**
+
+An IAM group is a collection of users. All users in the group inherit the permissions assigned to the group.
+
+Keep in mind the following features of groups:
+
+- Groups can have many users.
+- Users can belong to many groups.
+- Groups cannot belong to groups.
+
+#### IAM Policies
+
+- The way you grant permissions in IAM is by using IAM policies.
+- To manage access and provide permissions to AWS services and resources, you create IAM policies and attach them to an IAM identity.
+- Here is an example of an AWS Policy to give admin access on all resources
+
+```json
+{
+ "Version": "2012-10-17",
+ "Statement": [{
+  "Effect": "Allow",
+  "Action": "*",
+  "Resource": "*"
+ }]
+}
+```
+
+- Here is more granual one, This policy uses a _Deny_ effect to block access to Amazon S3 actions, unless the Amazon S3 resource that's being accessed is in account _222222222222_. This ensures that any Amazon S3 principals are accessing only the resources that are inside of a trusted AWS account.
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyS3AccessOutsideMyBoundary",
+      "Effect": "Deny",
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringNotEquals": {
+          "aws:ResourceAccount": [
+            "222222222222"
+          ]
+        }
+      }
+    }
+  ]
+}
+```
+
+#### IAM Roles
+
+
+**Purpose:** Roles are used for delegation and defining permissions for AWS service requests.
+
+**Temporary Credentials**: IAM roles provide temporary security credentials for users and services, eliminating the need for permanent credentials.
+
+**Assumption Methods:** Roles can be assumed through the AWS console, CLI, PowerShell, or API.
+
+**EC2 Integration:** Roles grant EC2 applications permissions for AWS API requests via instance profiles.
+
+- Only one role per EC2 instance.
+- Assign roles during or after instance creation.
+
+**Delegation**: Create roles with permissions policies and trust policies.
+
+- Trust policy specifies which accounts can assume the role.
+- Permissions policy grants necessary permissions to the role user.
+
+**Cross-Service Access:** AWS services assume roles for API calls to other services.
+**External Identity Providers***: Federated users can assume roles via identity providers, facilitated by AWS IAM Identity Center.
+
+**Policy Variables**: Use placeholders in policies to create flexible, multi-user applicable policies.
+
+Example: A group policy for programmatic access to user-specific objects in S3.
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": ["s3:ListBucket"],
+      "Effect": "Allow",
+      "Resource": ["arn:aws:s3:::mybucket"],
+      "Condition": {
+        "StringLike": {
+          "s3:prefix": ["${aws:username}/*"]
+        }
+      }
+    },
+    {
+      "Action": ["s3:GetObject", "s3:PutObject"],
+      "Effect": "Allow",
+      "Resource": ["arn:aws:s3:::mybucket/${aws:username}/*"]
+    }
+  ]
+}
+```
+
+#### Cross Account Permissions
+
+To grant cross-account permissions, you need to *attach an identity-based permissions policy to an IAM role.*
+
+For example, the AWS account A administrator can create a role to grant cross-account permissions to AWS account B as follows:
+
+1.  The account A administrator creates an IAM role and attaches a permissions policy - that grants permissions on resources in account A - to the role.
+2.  The account A administrator attaches a trust policy to the role that identifies account B as the principal who can assume the role.
+3.  The account B administrator delegates the permission to assume the role to any users in account B. This allows users in account B to create or access queues in account A.
+
+#### IAM Access Advisor
+
+**To help identify the unused roles,** IAM reports the last-used timestamp that represents when a role was last used to make an AWS request.
+
+Your security team can **use this information to identify, analyze, and then confidently remove unused roles**.
+
+#### IAM Access Analyzer
+
+**AWS IAM Access Analyzer** helps you identify the resources in your organization and accounts, such as Amazon S3 buckets or IAM roles, that are shared with an external entity.
+
+This lets you identify unintended access to your resources and data, which is a security risk.
+
+### Authentication Methods Overview
+
+![AWS Authentication Methods Overview](https://cdn-images-1.medium.com/max/800/1*LHzij-Gsm-L0tjCbZ8kjkA.png)
+
+#### Multi-factor Authentication
+
+MFA requires two or more authentication methods to verify an identity.
+
+- **Something you know:** Something you know, such as a user name and password or pin number
+- **Something you have:** Something you have, such as a one-time passcode from a hardware device or mobile app
+- **Something you are:** Something you are, such as a fingerprint or face scanning technology
+
+#### Authentication VS. Authorization
+
+**Authentication** answers the question, “*Are you who you say you are?*”
+**Authorization** answers the question, “*What actions can you perform?*”
+
+> You can't apply IAM permissions policies to the root user, which is one reason why AWS best practices recommend against using the root user.
+
+* * *
+
+For more insights and detailed notes, stay tuned for the next parts of this series. Subscribe now to ensure you don't miss any updates on our journey through the AWS Solutions Architect certification!

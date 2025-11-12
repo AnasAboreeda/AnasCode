@@ -1,70 +1,197 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --radius: 0.5rem;
-  }
+@theme {
+  /* Brand colors */
+  --color-brand: #1d3557;
+  --color-accent: #d62828;
+  --color-text: #1d3557;
+  --color-muted: #6b7280;
 
-  * {
-    @apply border-border;
-  }
+  /* Fonts */
+  --font-heading: var(--font-heading), Montserrat, ui-sans-serif, system-ui;
+  --font-body: var(--font-body), Roboto, ui-sans-serif, system-ui;
 
+  /* Max width */
+  --width-prose: 680px;
+
+  /* Text colors */
+  --color-accent-text: var(--color-accent);
+}
+
+:root {
+  --max-width: 680px;
+  --font-body: ui-sans-serif, system-ui;
+  --font-heading: ui-sans-serif, system-ui;
+
+  /* Brand palette as CSS variables */
+  --color-brand: #1d3557;
+  --color-accent: #d62828;
+  --color-text: #1d3557;
+  --color-muted: #6b7280;
+  --color-link: #1d3557;
+  --color-link-visited: #5b6fa3;
+  --focus-ring: 2px solid #1d3557;
+
+  /* Secondary brand colors - harmonious with navy and red */
+  --color-dark-shade: #2a4a6f;
+  --color-light-shade: #7491b3;
+  --color-light-accent: #fef6f6;
+  --color-black: #1a1d23;
+}
+
+html,
+body {
+  font-family: var(--font-body), Roboto, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  line-height: 1.75;
+  color: var(--color-brand);
+  background: #ffffff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), Montserrat, system-ui, -apple-system, "Segoe UI", Arial,
+    sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
   body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-semibold tracking-tight;
-  }
-
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
-  }
-
-  h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
-  }
-
-  h3 {
-    @apply text-2xl md:text-3xl;
-  }
-
-  h4 {
-    @apply text-xl md:text-2xl;
+    color: #f4f4f5;
+    background: #18181b;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: var(--color-link-visited);
+}
+
+a:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  a {
+    color: #60a5fa;
+  }
+
+  a:visited {
+    color: #c084fc;
   }
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Montserrat:wght@300;400;600&family=Roboto:wght@300;400;500;700;900&display=swap');
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Accent separator */
+.hr-accent {
+  border: 0;
+  border-top: 1px solid var(--color-accent);
+  opacity: 0.2;
+}
+
+/* Syntax highlighting for code blocks */
+code {
+  counter-reset: line;
+}
+
+code[data-line-numbers]>[data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1rem;
+  margin-right: 1.5rem;
+  text-align: right;
+  color: rgb(115, 115, 115);
+}
+
+code[data-line-numbers-max-digits="2"]>[data-line]::before {
+  width: 1.5rem;
+}
+
+code[data-line-numbers-max-digits="3"]>[data-line]::before {
+  width: 2rem;
+}
+
+[data-highlighted-line],
+.highlighted-line {
+  background-color: rgba(200, 200, 255, 0.1);
+  border-left: 3px solid rgb(125, 125, 255);
+  padding-left: 0.5rem;
+  margin-left: -0.5rem;
+}
+
+[data-highlighted-chars],
+.highlighted-chars {
+  background-color: rgba(200, 200, 255, 0.2);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+}
+
+[data-chars-id] {
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+}
+
+/* Shiki theme colors */
+.mdx-code-block {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.mdx-code-block code {
+  display: block;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.mdx-code-block code span {
+  white-space: pre-wrap;
+}
+
+code[data-theme*=" "],
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
+    color: var(--shiki-dark);
+  }
+}

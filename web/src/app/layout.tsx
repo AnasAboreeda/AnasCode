@@ -1,32 +1,45 @@
-import './globals.css';
+import "./globals.css";
 
-import { Inter } from 'next/font/google';
+import type { Metadata } from "next";
+import { Montserrat, Roboto } from "next/font/google";
 
-import FooterSection from '@/components/organisms/FooterSection/FooterSection';
-import Navbar from '@/components/organisms/Navbar/Navbar';
-import { defaultMetadata } from '@/lib/seo';
-import { Analytics } from '@vercel/analytics/react';
+import { GoogleAnalyticsEvents } from "@/components/analytics/GoogleAnalyticsEvents";
+import { buildMetadata } from "@/lib/seo";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
+const roboto = Roboto({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-body",
 });
 
-export const metadata = defaultMetadata;
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "600", "700"],
+  variable: "--font-heading",
+});
+
+export const metadata: Metadata = buildMetadata({});
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="antialiased">
-        <Navbar />
-        <main>{children}</main>
-        <FooterSection />
-        <Analytics />
+    <html lang="en" className={`${roboto.variable} ${montserrat.variable}`}>
+      <head>
+        <link rel="icon" href="/anas-code-anas-aboreeda-favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/anas-code-anas-aboreeda-favicon.png" />
+      </head>
+      <body>
+        {gaId && <GoogleAnalytics gaId={gaId} />}
+        <GoogleAnalyticsEvents />
+        {children}
       </body>
     </html>
   );
