@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 
-import { getAllArticles } from '../src/lib/mdx';
+import { getAllArticles } from '../web/src/lib/mdx';
 
 console.log('Testing article discovery...\n');
 

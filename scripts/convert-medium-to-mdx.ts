@@ -1,8 +1,11 @@
+#!/usr/bin/env tsx
+
 import * as fs from 'fs';
 import * as path from 'path';
 
 import { JSDOM } from 'jsdom';
 import TurndownService from 'turndown';
+// @ts-expect-error - turndown-plugin-gfm doesn't have proper ESM types
 import { gfm } from 'turndown-plugin-gfm';
 
 interface ArticleMetadata {
@@ -28,7 +31,7 @@ turndownService.use(gfm);
 // Custom rules for better conversion
 turndownService.addRule('codeBlock', {
   filter: (node: Node) => {
-    return (
+    return !!(
       node.nodeName === 'PRE' &&
       node.firstChild &&
       node.firstChild.nodeName === 'CODE'
@@ -192,8 +195,8 @@ published: ${metadata.published}
 }
 
 async function convertMediumToMDX() {
-  const mediumPostsDir = path.join(process.cwd(), 'content/medium-export/posts');
-  const outputDir = path.join(process.cwd(), 'content/articles');
+  const mediumPostsDir = path.join(process.cwd(), 'web/content/medium-export/posts');
+  const outputDir = path.join(process.cwd(), 'web/content/articles');
 
   if (!fs.existsSync(mediumPostsDir)) {
     console.error('Medium posts directory not found:', mediumPostsDir);

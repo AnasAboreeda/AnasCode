@@ -13,10 +13,10 @@ import { resolve } from "path";
 
 import { config } from "dotenv";
 
-import { clearCache, getCacheStats, setCache } from "../src/lib/cache";
+import { clearCache, getCacheStats } from "../web/src/lib/cache";
 
 // Load environment variables from .env.local
-config({ path: resolve(process.cwd(), ".env.local") });
+config({ path: resolve(process.cwd(), "web/.env.local") });
 
 const command = process.argv[2];
 
@@ -24,7 +24,7 @@ async function refreshTweetsCache() {
   console.log("🔄 Refreshing tweets cache...");
 
   // Import dynamically to avoid build issues
-  const { fetchUserTweets } = await import("../src/lib/twitter");
+  const { fetchUserTweets } = await import("../web/src/lib/twitter");
 
   // Don't clear cache - let fetchUserTweets check if cache is still valid
   // If cache exists and is not expired, it will be reused

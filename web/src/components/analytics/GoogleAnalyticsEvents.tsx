@@ -1,17 +1,17 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
 declare global {
   interface Window {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     gtag: (...args: any[]) => void;
-    dataLayer: unknown[];
   }
+  var dataLayer: unknown[];
 }
 
-export function GoogleAnalyticsEvents() {
+function GoogleAnalyticsEventsInner() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -243,4 +243,12 @@ export function GoogleAnalyticsEvents() {
   }, [pathname]);
 
   return null;
+}
+
+export function GoogleAnalyticsEvents() {
+  return (
+    <Suspense fallback={null}>
+      <GoogleAnalyticsEventsInner />
+    </Suspense>
+  );
 }
