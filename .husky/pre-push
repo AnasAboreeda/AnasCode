@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+echo "🧪 Running pre-push checks..."
+echo ""
+
+# Change to web directory
+cd web || exit 1
+
+echo "📦 Building the project..."
+pnpm build
+if [ $? -ne 0 ]; then
+  echo "❌ Build failed. Push aborted."
+  exit 1
+fi
+echo "✅ Build passed"
+echo ""
+
+echo "🎭 Running E2E tests..."
+pnpm test:e2e
+if [ $? -ne 0 ]; then
+  echo "❌ E2E tests failed. Push aborted."
+  exit 1
+fi
+echo "✅ E2E tests passed"
+echo ""
+
+echo "✨ All checks passed! Proceeding with push..."
