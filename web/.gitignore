@@ -41,8 +41,8 @@ next-env.d.ts
 # /.cache/
 
 # Medium export files
-/web/content/medium-export/
-web/content/medium-export-*/
+/content/medium-export/
+content/medium-export-*/
 medium-export-*/
 content/medium-export-*.zip
 
@@ -51,6 +51,3 @@ test-results/
 playwright-report/
 blob-report/
 playwright/.cache/
-web/test-results/
-web/playwright-report/
-web/blob-report/
