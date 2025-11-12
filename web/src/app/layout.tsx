@@ -6,6 +6,7 @@ import { Montserrat, Roboto } from "next/font/google";
 import { GoogleAnalyticsEvents } from "@/components/analytics/GoogleAnalyticsEvents";
 import { buildMetadata } from "@/lib/seo";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -37,9 +38,10 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/anas-code-anas-aboreeda-favicon.png" />
       </head>
       <body>
+        {children}
         {gaId && <GoogleAnalytics gaId={gaId} />}
         <GoogleAnalyticsEvents />
-        {children}
+        <SpeedInsights />
       </body>
     </html>
   );

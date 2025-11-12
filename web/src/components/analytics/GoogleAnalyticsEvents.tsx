@@ -28,6 +28,8 @@ function GoogleAnalyticsEventsInner() {
   // Track all clicks
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
+      if (typeof window.gtag === "undefined") return;
+
       const target = e.target as HTMLElement;
       const element = target.closest("a, button");
 
@@ -88,6 +90,8 @@ function GoogleAnalyticsEventsInner() {
     const tracked = new Set<number>();
 
     const handleScroll = () => {
+      if (typeof window.gtag === "undefined") return;
+
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrolled = (window.scrollY / scrollHeight) * 100;
 
@@ -113,6 +117,8 @@ function GoogleAnalyticsEventsInner() {
     const tracked = new Set<number>();
 
     const intervalId = setInterval(() => {
+      if (typeof window.gtag === "undefined") return;
+
       const timeSpent = Math.floor((Date.now() - startTime) / 1000);
 
       intervals.forEach((interval) => {
@@ -132,6 +138,8 @@ function GoogleAnalyticsEventsInner() {
   // Track form interactions
   useEffect(() => {
     const handleFormSubmit = (e: SubmitEvent) => {
+      if (typeof window.gtag === "undefined") return;
+
       const form = e.target as HTMLFormElement;
       const formId = form.id || "no-id";
       const formName = form.name || "no-name";
@@ -143,6 +151,8 @@ function GoogleAnalyticsEventsInner() {
     };
 
     const handleFormFocus = (e: FocusEvent) => {
+      if (typeof window.gtag === "undefined") return;
+
       const target = e.target as HTMLElement;
       if (
         target.tagName === "INPUT" ||
@@ -171,6 +181,8 @@ function GoogleAnalyticsEventsInner() {
   // Track copy/paste events
   useEffect(() => {
     const handleCopy = () => {
+      if (typeof window.gtag === "undefined") return;
+
       const selection = window.getSelection()?.toString().slice(0, 100);
       if (selection) {
         window.gtag("event", "content_copy", {
@@ -187,6 +199,8 @@ function GoogleAnalyticsEventsInner() {
   // Track video interactions (if any)
   useEffect(() => {
     const handleVideoPlay = (e: Event) => {
+      if (typeof window.gtag === "undefined") return;
+
       const video = e.target as HTMLVideoElement;
       window.gtag("event", "video_play", {
         video_src: video.src,
@@ -195,6 +209,8 @@ function GoogleAnalyticsEventsInner() {
     };
 
     const handleVideoPause = (e: Event) => {
+      if (typeof window.gtag === "undefined") return;
+
       const video = e.target as HTMLVideoElement;
       window.gtag("event", "video_pause", {
         video_src: video.src,
@@ -220,6 +236,8 @@ function GoogleAnalyticsEventsInner() {
   // Track search interactions
   useEffect(() => {
     const handleSearch = (e: Event) => {
+      if (typeof window.gtag === "undefined") return;
+
       const form = e.target as HTMLFormElement;
       const searchInput = form.querySelector('input[type="search"], input[name*="search"]') as HTMLInputElement;
 
