@@ -13,8 +13,8 @@ export default async function HomePage() {
 
   // Get cached tweets (never calls API, only reads from cache)
   // Cache is populated by GitHub Actions daily or via `pnpm cache:refresh`
-  // Note: maxResults must match the cache file (currently 10)
-  const tweets = await getCachedTweets("AnasAboreeda", 10);
+  // Note: maxResults must match the cache file (currently 5)
+  const tweets = await getCachedTweets("AnasAboreeda", 5);
   const recentTweets = tweets.slice(0, 3); // Show only 3 most recent
 
   return (

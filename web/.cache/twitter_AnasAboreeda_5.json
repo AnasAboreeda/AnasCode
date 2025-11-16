@@ -1,0 +1,248 @@
+{
+  "data": [
+    {
+      "id": "1988689647401333182",
+      "text": "Useful repo if you’re working with Claude:  \n🧩 https://t.co/d3oebdnzef \nCollection of ready-to-use Claude skills across coding, docs, data, and automation.",
+      "created_at": "2025-11-12T19:25:34.000Z",
+      "author": {
+        "username": "AnasAboreeda",
+        "name": "Anas Aboreeda",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1126147126419963904/0qtV-wSR_normal.jpg"
+      },
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 36
+      },
+      "entities": {
+        "annotations": [
+          {
+            "start": 35,
+            "end": 40,
+            "probability": 0.5457,
+            "type": "Other",
+            "normalized_text": "Claude"
+          },
+          {
+            "start": 99,
+            "end": 104,
+            "probability": 0.5815,
+            "type": "Other",
+            "normalized_text": "Claude"
+          }
+        ],
+        "urls": [
+          {
+            "start": 47,
+            "end": 70,
+            "url": "https://t.co/d3oebdnzef",
+            "expanded_url": "https://github.com/ComposioHQ/awesome-claude-skills",
+            "display_url": "github.com/ComposioHQ/awe…",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/1987922052943368192/135Pivmh?format=jpg&name=orig",
+                "width": 1200,
+                "height": 600
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/1987922052943368192/135Pivmh?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "GitHub - ComposioHQ/awesome-claude-skills: A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows",
+            "description": "A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows - ComposioHQ/awesome-claude-skills",
+            "unwound_url": "https://github.com/ComposioHQ/awesome-claude-skills"
+          }
+        ]
+      }
+    },
+    {
+      "id": "1796473625794785302",
+      "text": "🚀 Build AI Agent Teams easily with Flowise Agentflows! No coding needed—assign unlimited agents to achieve your goals. Perfect for anyone, similar to CrewAI &amp; Autogen. Watch now: https://t.co/5WdGYnS2pN #AI #NoCode #Automation",
+      "created_at": "2024-05-31T09:27:43.000Z",
+      "author": {
+        "username": "AnasAboreeda",
+        "name": "Anas Aboreeda",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1126147126419963904/0qtV-wSR_normal.jpg"
+      },
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 88
+      },
+      "entities": {
+        "annotations": [
+          {
+            "start": 8,
+            "end": 9,
+            "probability": 0.4082,
+            "type": "Organization",
+            "normalized_text": "AI"
+          },
+          {
+            "start": 150,
+            "end": 155,
+            "probability": 0.6539,
+            "type": "Other",
+            "normalized_text": "CrewAI"
+          }
+        ],
+        "urls": [
+          {
+            "start": 183,
+            "end": 206,
+            "url": "https://t.co/5WdGYnS2pN",
+            "expanded_url": "https://www.youtube.com/watch?v=284Z8k7yJRE",
+            "display_url": "youtube.com/watch?v=284Z8k…",
+            "status": 200,
+            "unwound_url": "https://www.youtube.com/watch?v=284Z8k7yJRE"
+          }
+        ],
+        "hashtags": [
+          {
+            "start": 207,
+            "end": 210,
+            "tag": "AI"
+          },
+          {
+            "start": 211,
+            "end": 218,
+            "tag": "NoCode"
+          },
+          {
+            "start": 219,
+            "end": 230,
+            "tag": "Automation"
+          }
+        ]
+      }
+    },
+    {
+      "id": "1637049176067387396",
+      "text": "AI everywhere 🙈🙃 https://t.co/UgKtyVIbpx",
+      "created_at": "2023-03-18T11:11:53.000Z",
+      "author": {
+        "username": "AnasAboreeda",
+        "name": "Anas Aboreeda",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1126147126419963904/0qtV-wSR_normal.jpg"
+      },
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 3,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 95
+      },
+      "entities": {
+        "annotations": [
+          {
+            "start": 0,
+            "end": 1,
+            "probability": 0.4673,
+            "type": "Organization",
+            "normalized_text": "AI"
+          }
+        ],
+        "urls": [
+          {
+            "start": 17,
+            "end": 40,
+            "url": "https://t.co/UgKtyVIbpx",
+            "expanded_url": "https://twitter.com/LiorOnAI/status/1636412853262467085",
+            "display_url": "x.com/LiorOnAI/statu…"
+          }
+        ]
+      }
+    },
+    {
+      "id": "1485568795091603456",
+      "text": "I just published: All you need to know about ‘Algorithms Complexity Analysis’ And Big O https://t.co/IYeW7iQSyV",
+      "created_at": "2022-01-24T11:02:55.000Z",
+      "author": {
+        "username": "AnasAboreeda",
+        "name": "Anas Aboreeda",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1126147126419963904/0qtV-wSR_normal.jpg"
+      },
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 0
+      },
+      "entities": {
+        "annotations": [
+          {
+            "start": 46,
+            "end": 75,
+            "probability": 0.8772,
+            "type": "Other",
+            "normalized_text": "Algorithms Complexity Analysis"
+          },
+          {
+            "start": 86,
+            "end": 86,
+            "probability": 0.4144,
+            "type": "Other",
+            "normalized_text": "O"
+          }
+        ],
+        "urls": [
+          {
+            "start": 88,
+            "end": 111,
+            "url": "https://t.co/IYeW7iQSyV",
+            "expanded_url": "https://link.medium.com/va6OuMZO4mb",
+            "display_url": "link.medium.com/va6OuMZO4mb",
+            "status": 200,
+            "unwound_url": "https://link.medium.com/va6OuMZO4mb"
+          }
+        ]
+      }
+    },
+    {
+      "id": "1475357250344656901",
+      "text": "Making your code readable is as important as making it executable. #CleanCode #programming",
+      "created_at": "2021-12-27T06:45:53.000Z",
+      "author": {
+        "username": "AnasAboreeda",
+        "name": "Anas Aboreeda",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1126147126419963904/0qtV-wSR_normal.jpg"
+      },
+      "public_metrics": {
+        "retweet_count": 1,
+        "reply_count": 0,
+        "like_count": 1,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 0
+      },
+      "entities": {
+        "hashtags": [
+          {
+            "start": 67,
+            "end": 77,
+            "tag": "CleanCode"
+          },
+          {
+            "start": 78,
+            "end": 90,
+            "tag": "programming"
+          }
+        ]
+      }
+    }
+  ],
+  "timestamp": 1763221987480,
+  "expiresAt": 1763308387480
+}

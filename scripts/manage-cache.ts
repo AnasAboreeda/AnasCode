@@ -9,14 +9,12 @@
  *   pnpm cache:tweets stats    - Show cache statistics
  */
 
-import { resolve } from "path";
-
 import { config } from "dotenv";
 
 import { clearCache, getCacheStats } from "./lib/cache.js";
 
 // Load environment variables from .env.local
-config({ path: resolve(process.cwd(), "web/.env.local") });
+config();
 
 const command = process.argv[2];
 
@@ -29,7 +27,7 @@ async function refreshTweetsCache() {
   // Don't clear cache - let fetchUserTweets check if cache is still valid
   // If cache exists and is not expired, it will be reused
   // If expired or missing, it will fetch from API
-  const tweets = await fetchUserTweets("AnasAboreeda", 3);
+  const tweets = await fetchUserTweets("AnasAboreeda", 5);
 
   if (tweets.length > 0) {
     console.log(`✅ Successfully cached ${tweets.length} tweets`);
