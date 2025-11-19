@@ -32,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const articlePages: MetadataRoute.Sitemap = articles.map((article) => ({
-    url: article.canonicalUrl || `${site.url}/articles/${article.slug}`,
+    url: `${site.url}/articles/${article.slug}`,
     lastModified: new Date(article.date),
     changeFrequency: "monthly" as const,
     priority: 0.7,
