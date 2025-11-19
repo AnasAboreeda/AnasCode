@@ -19,6 +19,7 @@ export const site = {
       { href: "https://linkedin.com/in/anasaboreeda", label: "LinkedIn", external: true },
       { href: "https://medium.com/@anas-aboreeda", label: "Medium", external: true },
       { href: "/rss", label: "RSS", external: false },
+      { href: "/sitemap-page", label: "Sitemap", external: false },
     ],
   },
   pages: {

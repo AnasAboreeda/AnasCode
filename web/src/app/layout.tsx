@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Montserrat, Roboto } from "next/font/google";
 
 import { GoogleAnalyticsEvents } from "@/components/analytics/GoogleAnalyticsEvents";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, buildPersonJsonLd } from "@/lib/seo";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -30,12 +30,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const personSchema = buildPersonJsonLd();
 
   return (
     <html lang="en" className={`${roboto.variable} ${montserrat.variable}`}>
       <head>
         <link rel="icon" href="/anas-code-anas-aboreeda-favicon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/anas-code-anas-aboreeda-favicon.png" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
       </head>
       <body>
         {children}

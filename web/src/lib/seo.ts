@@ -85,6 +85,7 @@ export function buildPersonJsonLd(): object {
     "@context": "https://schema.org",
     "@type": "Person",
     name: site.author.name,
+    alternateName: ["Anas Aboureada"],
     url: site.url,
     email: site.author.email,
     jobTitle: "Software Engineer",
@@ -92,6 +93,11 @@ export function buildPersonJsonLd(): object {
       "@type": "PostalAddress",
       addressLocality: site.author.location,
     },
+    sameAs: [
+      "https://www.linkedin.com/in/anasaboreeda/",
+      "https://github.com/anasaboreeda",
+      "https://medium.com/@anas-aboreeda",
+    ],
   };
 }
 

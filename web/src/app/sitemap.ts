@@ -1,29 +1,30 @@
 import { MetadataRoute } from "next";
 
 import { articles } from "@/content/articles";
+import { site } from "@/content/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     {
-      url: "https://www.anascode.com",
+      url: site.url,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: "https://www.anascode.com/articles",
+      url: `${site.url}/articles`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: "https://www.anascode.com/links",
+      url: `${site.url}/links`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
-      url: "https://www.anascode.com/about",
+      url: `${site.url}/about`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
@@ -31,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const articlePages: MetadataRoute.Sitemap = articles.map((article) => ({
-    url: article.canonicalUrl || `https://www.anascode.com/articles/${article.slug}`,
+    url: article.canonicalUrl || `${site.url}/articles/${article.slug}`,
     lastModified: new Date(article.date),
     changeFrequency: "monthly" as const,
     priority: 0.7,
