@@ -92,12 +92,7 @@ export function buildPersonJsonLd(): object {
     address: {
       "@type": "PostalAddress",
       addressLocality: site.author.location,
-    },
-    sameAs: [
-      "https://www.linkedin.com/in/anasaboreeda/",
-      "https://github.com/anasaboreeda",
-      "https://medium.com/@anas-aboreeda",
-    ],
+    }
   };
 }
 

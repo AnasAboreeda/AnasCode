@@ -2,7 +2,7 @@ import Heading from "@/components/atoms/Heading";
 import Text from "@/components/atoms/Text";
 import SingleColumn from "@/components/templates/SingleColumn";
 import { about } from "@/content/about";
-import { buildMetadata, buildPersonJsonLd } from "@/lib/seo";
+import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "About",
@@ -166,21 +166,6 @@ export default function AboutPage() {
           ))}
         </ul>
       </section>
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            ...buildPersonJsonLd(),
-            sameAs: [
-              about.social.github,
-              about.social.linkedin,
-              about.social.medium,
-              about.social.twitter,
-            ],
-          }),
-        }}
-      />
     </SingleColumn>
   );
 }
