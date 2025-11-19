@@ -4,7 +4,6 @@ import path from "path";
 interface CacheEntry<T> {
   data: T;
   timestamp: number;
-  expiresAt: number;
 }
 
 const CACHE_DIR = path.join(process.cwd(), ".cache");
@@ -29,17 +28,16 @@ function getCacheFilePath(key: string): string {
 /**
  * Write data to cache with TTL (time to live in seconds)
  */
-export function setCache<T>(key: string, data: T, ttlSeconds: number): void {
+export function setCache<T>(key: string, data: T): void {
   try {
     ensureCacheDir();
     const entry: CacheEntry<T> = {
       data,
-      timestamp: Date.now(),
-      expiresAt: Date.now() + ttlSeconds * 1000,
+      timestamp: Date.now()
     };
     const filePath = getCacheFilePath(key);
     fs.writeFileSync(filePath, JSON.stringify(entry, null, 2), "utf-8");
-    console.log(`[Cache] Written: ${key} (expires in ${ttlSeconds}s)`);
+    console.log(`[Cache] Written: ${key}`);
   } catch (error) {
     console.error(`[Cache] Error writing cache for ${key}:`, error);
   }
@@ -59,14 +57,6 @@ export function getCache<T>(key: string): T | null {
 
     const content = fs.readFileSync(filePath, "utf-8");
     const entry: CacheEntry<T> = JSON.parse(content);
-
-    // Check if cache is expired
-    if (Date.now() > entry.expiresAt) {
-      console.log(`[Cache] Expired: ${key}`);
-      // Optionally delete expired cache
-      fs.unlinkSync(filePath);
-      return null;
-    }
 
     const ageMinutes = Math.round((Date.now() - entry.timestamp) / 1000 / 60);
     console.log(`[Cache] Hit: ${key} (age: ${ageMinutes}m)`);
@@ -113,17 +103,23 @@ export function getCacheStats(): {
 
     files.forEach((file) => {
       const filePath = path.join(CACHE_DIR, file);
-      const stats = fs.statSync(filePath);
-      totalSize += stats.size;
 
       try {
-        const content = fs.readFileSync(filePath, "utf-8");
-        const entry: CacheEntry<unknown> = JSON.parse(content);
-        if (entry.timestamp < oldestTimestamp) {
-          oldestTimestamp = entry.timestamp;
+        const stats = fs.statSync(filePath);
+        totalSize += stats.size;
+
+        try {
+          const content = fs.readFileSync(filePath, "utf-8");
+          const entry: CacheEntry<unknown> = JSON.parse(content);
+          if (entry.timestamp < oldestTimestamp) {
+            oldestTimestamp = entry.timestamp;
+          }
+        } catch {
+          // Ignore parse errors
         }
       } catch {
-        // Ignore parse errors
+        // Skip files that cannot be accessed (e.g., deleted during iteration)
+        console.warn(`[Cache] Could not access file: ${file}`);
       }
     });
 

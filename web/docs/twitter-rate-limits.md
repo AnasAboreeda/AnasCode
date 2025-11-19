@@ -177,8 +177,7 @@ cat > .cache/twitter_AnasAboreeda_10.json << 'EOF'
       }
     }
   ],
-  "timestamp": $(date +%s)000,
-  "expiresAt": $(($(date +%s) + 604800))000
+  "timestamp": $(date +%s)000
 }
 EOF
 

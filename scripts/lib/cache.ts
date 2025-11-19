@@ -4,7 +4,6 @@ import path from "path";
 interface CacheEntry<T> {
   data: T;
   timestamp: number;
-  expiresAt: number;
 }
 
 // Cache directory is in the web project
@@ -63,17 +62,23 @@ export function getCacheStats(): {
 
     files.forEach((file) => {
       const filePath = path.join(CACHE_DIR, file);
-      const stats = fs.statSync(filePath);
-      totalSize += stats.size;
 
       try {
-        const content = fs.readFileSync(filePath, "utf-8");
-        const entry: CacheEntry<unknown> = JSON.parse(content);
-        if (entry.timestamp < oldestTimestamp) {
-          oldestTimestamp = entry.timestamp;
+        const stats = fs.statSync(filePath);
+        totalSize += stats.size;
+
+        try {
+          const content = fs.readFileSync(filePath, "utf-8");
+          const entry: CacheEntry<unknown> = JSON.parse(content);
+          if (entry.timestamp < oldestTimestamp) {
+            oldestTimestamp = entry.timestamp;
+          }
+        } catch {
+          // Ignore parse errors
         }
       } catch {
-        // Ignore parse errors
+        // Skip files that cannot be accessed (e.g., deleted during iteration)
+        console.warn(`[Cache] Could not access file: ${file}`);
       }
     });
 

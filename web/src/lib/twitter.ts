@@ -350,7 +350,7 @@ export async function fetchUserTweets(
     });
 
     // Cache the successful response
-    setCache(cacheKey, tweets, CACHE_TTL_SECONDS);
+    setCache(cacheKey, tweets);
     console.log(`[Twitter] Cached ${tweets.length} tweets for @${username}`);
 
     return tweets;

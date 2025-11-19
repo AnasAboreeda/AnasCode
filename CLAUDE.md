@@ -152,7 +152,6 @@ Structure:
 {
   "data": [...],           // Tweet objects
   "timestamp": 1699776000, // Fetch time
-  "expiresAt": 1700380800  // Expiry (7 days)
 }
 ```
 

@@ -140,7 +140,6 @@ AnasCode-V2/
 │       {
 │         "data": [...],                 ← 3 latest tweets
 │         "timestamp": 1699776000000,    ← Fetch time
-│         "expiresAt": 1700380800000     ← Expiry (7 days)
 │       }
 │
 ├── .github/

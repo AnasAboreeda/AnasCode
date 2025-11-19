@@ -10,7 +10,7 @@ To minimize Twitter API calls and stay within the free tier rate limit (100 requ
 
 - **Location**: `.cache/` directory (gitignored)
 - **TTL**: 7 days (configurable in `src/lib/twitter.ts`)
-- **Storage**: JSON files with metadata (timestamp, expiry)
+- **Storage**: JSON files with metadata (timestamp)
 - **Benefits**:
   - Survives server restarts
   - Works in serverless environments (Vercel)
